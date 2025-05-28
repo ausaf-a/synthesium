@@ -1,0 +1,354 @@
+{
+  "images": {
+    "3e3f47d0a3600edcc4cc8b10ee221742": "cache/images/image_3e3f47d0a3600edcc4cc8b10ee221742.png",
+    "085f6070becd3e1b9f770350465b23a4": "cache/images/image_085f6070becd3e1b9f770350465b23a4.png",
+    "4b87c596a1dd1f2a17f4540a810672d6": "cache/images/image_4b87c596a1dd1f2a17f4540a810672d6.png",
+    "f199534f059653aa2eabf0781223b030": "cache/images/image_f199534f059653aa2eabf0781223b030.png",
+    "9dde1d5dc83b559520763fc50877a775": "cache/images/image_9dde1d5dc83b559520763fc50877a775.png"
+  },
+  "audio": {
+    "9b5c6840b0a0dec0c7fce61730eb45a0": "cache/audio/audio_9b5c6840b0a0dec0c7fce61730eb45a0.mp3",
+    "34195777e46f1a9572007b2bd33dbbe7": "cache/audio/audio_34195777e46f1a9572007b2bd33dbbe7.mp3",
+    "bc83e1464771bd32eb540359539588bf": "cache/audio/audio_bc83e1464771bd32eb540359539588bf.mp3",
+    "098a5f924d328a579d1b120353a2724f": "cache/audio/audio_098a5f924d328a579d1b120353a2724f.mp3",
+    "b071e276a43677837a083689b42c8bd2": "cache/audio/audio_b071e276a43677837a083689b42c8bd2.mp3"
+  },
+  "whisper": {
+    "9b5c6840b0a0dec0c7fce61730eb45a0": {
+      "word_timings": [
+        {
+          "word": "He",
+          "start_time": 0.0,
+          "end_time": 0.14000000059604645,
+          "confidence": 1.0
+        },
+        {
+          "word": "was",
+          "start_time": 0.14000000059604645,
+          "end_time": 0.3400000035762787,
+          "confidence": 1.0
+        },
+        {
+          "word": "built",
+          "start_time": 0.3400000035762787,
+          "end_time": 0.5,
+          "confidence": 1.0
+        },
+        {
+          "word": "to",
+          "start_time": 0.5,
+          "end_time": 0.8999999761581421,
+          "confidence": 1.0
+        },
+        {
+          "word": "serve",
+          "start_time": 0.8999999761581421,
+          "end_time": 1.1399999856948853,
+          "confidence": 1.0
+        },
+        {
+          "word": "but",
+          "start_time": 1.4800000190734863,
+          "end_time": 1.559999942779541,
+          "confidence": 1.0
+        },
+        {
+          "word": "all",
+          "start_time": 1.559999942779541,
+          "end_time": 1.7000000476837158,
+          "confidence": 1.0
+        },
+        {
+          "word": "he",
+          "start_time": 1.7000000476837158,
+          "end_time": 1.8799999952316284,
+          "confidence": 1.0
+        },
+        {
+          "word": "wanted",
+          "start_time": 1.8799999952316284,
+          "end_time": 2.0799999237060547,
+          "confidence": 1.0
+        },
+        {
+          "word": "was",
+          "start_time": 2.0799999237060547,
+          "end_time": 2.359999895095825,
+          "confidence": 1.0
+        },
+        {
+          "word": "to",
+          "start_time": 2.359999895095825,
+          "end_time": 2.5399999618530273,
+          "confidence": 1.0
+        },
+        {
+          "word": "feel",
+          "start_time": 2.5399999618530273,
+          "end_time": 2.7799999713897705,
+          "confidence": 1.0
+        }
+      ],
+      "duration": 3.22,
+      "source": "whisper"
+    },
+    "34195777e46f1a9572007b2bd33dbbe7": {
+      "word_timings": [
+        {
+          "word": "The",
+          "start_time": 0.0,
+          "end_time": 0.20000000298023224,
+          "confidence": 1.0
+        },
+        {
+          "word": "city",
+          "start_time": 0.20000000298023224,
+          "end_time": 0.47999998927116394,
+          "confidence": 1.0
+        },
+        {
+          "word": "pulsed",
+          "start_time": 0.47999998927116394,
+          "end_time": 0.8999999761581421,
+          "confidence": 1.0
+        },
+        {
+          "word": "with",
+          "start_time": 0.8999999761581421,
+          "end_time": 1.159999966621399,
+          "confidence": 1.0
+        },
+        {
+          "word": "life",
+          "start_time": 1.159999966621399,
+          "end_time": 1.5,
+          "confidence": 1.0
+        },
+        {
+          "word": "something",
+          "start_time": 2.0799999237060547,
+          "end_time": 2.140000104904175,
+          "confidence": 1.0
+        },
+        {
+          "word": "he",
+          "start_time": 2.140000104904175,
+          "end_time": 2.3399999141693115,
+          "confidence": 1.0
+        },
+        {
+          "word": "could",
+          "start_time": 2.3399999141693115,
+          "end_time": 2.5399999618530273,
+          "confidence": 1.0
+        },
+        {
+          "word": "never",
+          "start_time": 2.5399999618530273,
+          "end_time": 2.8399999141693115,
+          "confidence": 1.0
+        },
+        {
+          "word": "truly",
+          "start_time": 2.8399999141693115,
+          "end_time": 3.240000009536743,
+          "confidence": 1.0
+        },
+        {
+          "word": "grasp",
+          "start_time": 3.240000009536743,
+          "end_time": 3.619999885559082,
+          "confidence": 1.0
+        }
+      ],
+      "duration": 4.01,
+      "source": "whisper"
+    },
+    "b071e276a43677837a083689b42c8bd2": {
+      "word_timings": [
+        {
+          "word": "Maybe",
+          "start_time": 0.0,
+          "end_time": 0.35382353354696566,
+          "confidence": 1.0
+        },
+        {
+          "word": "feeling",
+          "start_time": 0.35382353354696566,
+          "end_time": 0.7548234913679153,
+          "confidence": 1.0
+        },
+        {
+          "word": "wasn't",
+          "start_time": 0.7548234913679153,
+          "end_time": 1.132235237051873,
+          "confidence": 1.0
+        },
+        {
+          "word": "programmed",
+          "start_time": 1.132235237051873,
+          "end_time": 1.6983529610254353,
+          "confidence": 1.0
+        },
+        {
+          "word": "but",
+          "start_time": 2.523941229401161,
+          "end_time": 2.6418822900861207,
+          "confidence": 1.0
+        },
+        {
+          "word": "maybe",
+          "start_time": 2.6418822900861207,
+          "end_time": 2.9013529047867013,
+          "confidence": 1.0
+        },
+        {
+          "word": "it",
+          "start_time": 2.9013529047867013,
+          "end_time": 3.066470389745645,
+          "confidence": 1.0
+        },
+        {
+          "word": "didn't",
+          "start_time": 3.066470389745645,
+          "end_time": 3.3731174287202093,
+          "confidence": 1.0
+        },
+        {
+          "word": "need",
+          "start_time": 3.3731174287202093,
+          "end_time": 3.608999831283798,
+          "confidence": 1.0
+        },
+        {
+          "word": "to",
+          "start_time": 3.608999831283798,
+          "end_time": 3.821294021710395,
+          "confidence": 1.0
+        },
+        {
+          "word": "be",
+          "start_time": 3.821294021710395,
+          "end_time": 4.01,
+          "confidence": 1.0
+        }
+      ],
+      "duration": 4.01,
+      "source": "whisper"
+    },
+    "bc83e1464771bd32eb540359539588bf": {
+      "word_timings": [
+        {
+          "word": "Love",
+          "start_time": 0.0,
+          "end_time": 0.4000000059604645,
+          "confidence": 1.0
+        },
+        {
+          "word": "warmth",
+          "start_time": 0.5,
+          "end_time": 0.800000011920929,
+          "confidence": 1.0
+        },
+        {
+          "word": "connection",
+          "start_time": 0.9599999785423279,
+          "end_time": 1.3600000143051147,
+          "confidence": 1.0
+        },
+        {
+          "word": "it",
+          "start_time": 1.7200000286102295,
+          "end_time": 1.7599999904632568,
+          "confidence": 1.0
+        },
+        {
+          "word": "all",
+          "start_time": 1.7599999904632568,
+          "end_time": 1.9600000381469727,
+          "confidence": 1.0
+        },
+        {
+          "word": "seems",
+          "start_time": 1.9600000381469727,
+          "end_time": 2.1600000858306885,
+          "confidence": 1.0
+        },
+        {
+          "word": "so",
+          "start_time": 2.1600000858306885,
+          "end_time": 2.4800000190734863,
+          "confidence": 1.0
+        },
+        {
+          "word": "distant",
+          "start_time": 2.4800000190734863,
+          "end_time": 2.7200000286102295,
+          "confidence": 1.0
+        }
+      ],
+      "duration": 3.02,
+      "source": "whisper"
+    },
+    "098a5f924d328a579d1b120353a2724f": {
+      "word_timings": [
+        {
+          "word": "And",
+          "start_time": 0.0,
+          "end_time": 0.2902325602348848,
+          "confidence": 1.0
+        },
+        {
+          "word": "yet",
+          "start_time": 0.2902325602348848,
+          "end_time": 0.5320930361072935,
+          "confidence": 1.0
+        },
+        {
+          "word": "in",
+          "start_time": 0.6046511806710171,
+          "end_time": 0.6772093252347406,
+          "confidence": 1.0
+        },
+        {
+          "word": "that",
+          "start_time": 0.6772093252347406,
+          "end_time": 0.9916279276508635,
+          "confidence": 1.0
+        },
+        {
+          "word": "moment",
+          "start_time": 0.9916279276508635,
+          "end_time": 1.3544186504694813,
+          "confidence": 1.0
+        },
+        {
+          "word": "something",
+          "start_time": 1.5962791804019183,
+          "end_time": 1.9590698311404984,
+          "confidence": 1.0
+        },
+        {
+          "word": "stirred",
+          "start_time": 1.9590698311404984,
+          "end_time": 2.442790746845297,
+          "confidence": 1.0
+        },
+        {
+          "word": "within",
+          "start_time": 2.442790746845297,
+          "end_time": 2.8539534459063343,
+          "confidence": 1.0
+        },
+        {
+          "word": "him",
+          "start_time": 2.8539534459063343,
+          "end_time": 3.12,
+          "confidence": 1.0
+        }
+      ],
+      "duration": 3.12,
+      "source": "whisper"
+    }
+  }
+}

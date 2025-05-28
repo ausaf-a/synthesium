@@ -25,8 +25,8 @@ class CharacterManager:
         if not self.consistency_enabled:
             return scene_description
         
-        # Build the enhanced prompt
-        enhanced_prompt = f"{self.character_description}. {scene_description}. {self.style_anchor}"
+        # Build the enhanced prompt with explicit portrait orientation
+        enhanced_prompt = f"{self.character_description}. {scene_description}. Vertical portrait format, tall composition. {self.style_anchor}"
         
         return enhanced_prompt
     

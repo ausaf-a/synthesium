@@ -5,7 +5,9 @@ Main orchestrator for creating narrative-driven videos from scripts.
 """
 
 import os
+import sys
 import time
+import argparse
 from datetime import datetime
 from config.settings import settings
 from services.openai_service import OpenAIService
@@ -98,6 +100,43 @@ def create_video(script, output_filename=None, cleanup_temp=True):
 
 def main():
     """Main function with example script."""
+    
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Generate narrative videos with AI')
+    parser.add_argument('--regenerate-images', action='store_true', help='Force regenerate all images')
+    parser.add_argument('--regenerate-audio', action='store_true', help='Force regenerate all audio')
+    parser.add_argument('--regenerate-all', action='store_true', help='Force regenerate everything')
+    parser.add_argument('--clear-cache', choices=['images', 'audio', 'whisper', 'all'], help='Clear cache')
+    parser.add_argument('--cache-stats', action='store_true', help='Show cache statistics')
+    args = parser.parse_args()
+    
+    # Handle cache clearing
+    if args.clear_cache:
+        from services.cache_manager import CacheManager
+        cache_manager = CacheManager()
+        cache_manager.clear_cache(args.clear_cache)
+        return 0
+    
+    # Handle cache stats
+    if args.cache_stats:
+        from services.cache_manager import CacheManager
+        cache_manager = CacheManager()
+        stats = cache_manager.get_cache_stats()
+        print("\n📊 Cache Statistics:")
+        print(f"Images cached: {stats['images_cached']}")
+        print(f"Audio cached: {stats['audio_cached']}")
+        print(f"Whisper timings cached: {stats['whisper_cached']}")
+        print(f"Cache enabled: {stats['cache_enabled']}")
+        return 0
+    
+    # Override settings based on arguments
+    if args.regenerate_images or args.regenerate_all:
+        settings.FORCE_REGENERATE_IMAGES = True
+        print("🔄 Force regenerating images")
+    
+    if args.regenerate_audio or args.regenerate_all:
+        settings.FORCE_REGENERATE_AUDIO = True
+        print("🔄 Force regenerating audio")
     
     # Example script from PRD
     script = [
