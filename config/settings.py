@@ -22,6 +22,11 @@ class Settings:
     IMAGE_SIZE = "1024x1792"  # Vertical format
     IMAGE_QUALITY = "standard"  # or "hd"
     
+    # Character Consistency Configuration
+    CHARACTER_CONSISTENCY = True
+    CHARACTER_DESCRIPTION_TEMPLATE = "Cinematic scene featuring a sleek blue humanoid robot with glowing orange eyes and weathered metal plating"
+    STYLE_ANCHOR = "photorealistic, cinematic lighting, detailed 3D render"
+    
     # Output Configuration
     OUTPUT_DIR = "output"
     TEMP_DIR = "temp"

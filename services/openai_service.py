@@ -2,12 +2,14 @@ import os
 import requests
 from openai import OpenAI
 from config.settings import settings
+from services.character_manager import CharacterManager
 from typing import List, Dict
 import tempfile
 
 class OpenAIService:
     def __init__(self):
         self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
+        self.character_manager = CharacterManager()
     
     def generate_image(self, prompt: str, output_path: str) -> str:
         """
@@ -21,11 +23,14 @@ class OpenAIService:
             Path to the saved image file
         """
         try:
+            # Enhance prompt with character consistency
+            enhanced_prompt = self.character_manager.enhance_scene_prompt(prompt)
             print(f"Generating image: {prompt[:50]}...")
+            print(f"Enhanced prompt: {enhanced_prompt[:100]}...")
             
             response = self.client.images.generate(
                 model=settings.IMAGE_MODEL,
-                prompt=prompt,
+                prompt=enhanced_prompt,
                 size=settings.IMAGE_SIZE,
                 quality=settings.IMAGE_QUALITY,
                 n=1,
@@ -103,5 +108,6 @@ class OpenAIService:
             'image_path': image_path,
             'audio_path': audio_path,
             'scene_description': scene['sceneDescription'],
-            'voiceover_text': scene['voiceoverText']
+            'voiceover_text': scene['voiceoverText'],
+            'character_info': self.character_manager.get_character_info()
         }
