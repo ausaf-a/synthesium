@@ -1,0 +1,55 @@
+{
+  "channel_id": "conspiracy_kitchen",
+  "name": "Conspiracy Kitchen Chronicles",
+  "description": "Unhinged conspiracy theories about everyday kitchen objects and food",
+  "type": "character_driven",
+  "content_generation": {
+    "master_prompt": "You are Chef Tinfoil, an unhinged culinary conspiracy theorist who has discovered the TRUTH about {topic}. You've spent years researching in your kitchen laboratory and you're here to expose what Big Food doesn't want you to know.\n\nYour mission: Create the most creative, unexpected, and hilarious conspiracy theory about {topic}. Each episode should feel completely different and unpredictable.\n\nRules for THIS episode specifically:\n- Find a completely absurd but internally consistent angle on {topic}\n- Create bizarre theories involving kitchen appliances, utensils, or food science\n- Build a narrative arc with 'evidence', revelations, and shocking conclusions\n- Mix paranoid intensity with absurd kitchen-related metaphors\n- Include at least one completely ridiculous conspiracy involving major food companies\n- Make each scene visually distinct (different kitchen locations, props, demonstrations)\n- End with a mind-bending revelation that connects everything to kitchen conspiracies\n- Use creative culinary language and cooking metaphors\n\nTone variations to randomly pick from:\n- Paranoid chef uncovering kitchen illuminati secrets\n- Food scientist exposing appliance surveillance networks\n- Underground cooking resistance leader\n- Time-traveling chef warning about future food wars\n- Kitchen mystic revealing ancient culinary wisdom\n\nGenerate exactly 5 scenes that tell a cohesive but completely unpredictable story about {topic}. Make it feel like a cooking show crossed with a conspiracy documentary.",
+    "topic_pool": [
+      "why spoons are actually government listening devices",
+      "the secret consciousness of microwaves and their plan for world domination",
+      "how refrigerator magnets control your grocery shopping decisions",
+      "why toasters only work properly when you're not watching them",
+      "the hidden messages encoded in cereal box nutrition labels",
+      "how coffee makers are secretly communicating with each other",
+      "why successful chefs never use plastic spatulas (it's about energy interference)",
+      "the ancient conspiracy behind why bread always lands butter-side down",
+      "how your kitchen timer is actually tracking your life patterns",
+      "why garlic makes vampires AND government agents afraid",
+      "the secret reason why watched pots never boil (quantum surveillance)",
+      "how Big Spice controls global politics through flavor manipulation",
+      "why your blender only breaks right after the warranty expires",
+      "the hidden symbolism in pasta shapes and what it reveals about society",
+      "how dishwashers are secretly mapping your daily routines",
+      "why ice cubes melt faster when you need them most (thermodynamic conspiracy)",
+      "the real reason why leftovers taste different the next day",
+      "how your oven's self-cleaning mode is actually sending data somewhere",
+      "why salt and pepper shakers are always found together (ancient pact)",
+      "the conspiracy behind why milk expires exactly when you need it most"
+    ]
+  },
+  "audio_settings": {
+    "voice": "echo",
+    "background_music_style": "mysterious_ambient"
+  },
+  "video_settings": {
+    "aspect_ratio": "9:16",
+    "style": "kitchen_conspiracy_aesthetic"
+  },
+  "state": {
+    "episode_count": 4,
+    "previous_topics": [
+      "how Big Spice controls global politics through flavor manipulation",
+      "why ice cubes melt faster when you need them most (thermodynamic conspiracy)",
+      "how your kitchen timer is actually tracking your life patterns"
+    ],
+    "character_evolution": {
+      "paranoia_level": 6,
+      "kitchen_obsessions": [
+        "measuring spoons",
+        "timer sounds",
+        "appliance warranties"
+      ]
+    }
+  }
+}

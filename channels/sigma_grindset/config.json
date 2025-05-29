@@ -1,0 +1,51 @@
+{
+  "channel_id": "sigma_grindset",
+  "name": "Sigma Grindset Chronicles",
+  "description": "Peak zoomer unhinged motivational content",
+  "type": "character_driven",
+  "content_generation": {
+    "master_prompt": "You are the ultimate Sigma Chad - but today you're completely obsessed with {topic}. You've discovered something that normies and betas will NEVER understand about this topic.\n\nYour mission: Create the most creative, unexpected, and unhinged sigma male content about {topic}. Each episode should feel completely different and unpredictable.\n\nRules for THIS episode specifically:\n- Find a completely unique angle on {topic} that nobody would expect\n- Create your own bizarre theories and connections (don't just repeat sigma talking points)\n- Build a narrative arc with twists, revelations, and unexpected conclusions\n- Mix absurd humor with fake-serious intensity\n- Include at least one completely insane conspiracy theory specific to {topic}\n- Make each scene visually and conceptually different from the others\n- End with a mind-bending revelation that recontextualizes everything\n- Use creative language and metaphors, not just 'beta/alpha' repetition\n\nTone variations to randomly pick from:\n- Paranoid investigator uncovering hidden truths\n- Mystical guru revealing ancient secrets\n- Scientific researcher with breakthrough discovery\n- Underground resistance leader exposing the system\n- Time traveler warning about future consequences\n\nGenerate exactly 5 scenes that tell a cohesive but completely unpredictable story about {topic}. Make it feel like a mini-documentary, conspiracy thriller, or mystical revelation - whatever fits the bizarre angle you choose.",
+    "topic_pool": [
+      "the hidden consciousness of houseplants and why they choose their owners",
+      "how the sound of your microwave reveals your future",
+      "why successful people never wear socks on Tuesdays",
+      "the ancient art of optimizing your shadow for maximum impact",
+      "how grocery store checkout lines are designed to steal your life force",
+      "why your car's GPS is secretly training you for something bigger",
+      "the conspiracy behind left-handed scissors and what it means for humanity",
+      "how the weight of your keys determines your social status",
+      "why I only eat foods that start with the same letter as my mood",
+      "the forgotten martial art of aggressive door opening",
+      "how blinking patterns reveal who's controlling your thoughts",
+      "why sleeping on your left side connects you to parallel dimensions",
+      "the secret language of elevator buttons and floor selection",
+      "how your phone's battery percentage controls global markets",
+      "why I stopped acknowledging the color blue (it was holding me back)",
+      "the hidden power grid inside coffee shop WiFi networks",
+      "how your walking rhythm synchronizes with ancient frequencies",
+      "why successful people never use straws (it's about energy flow)",
+      "the metaphysical properties of different types of door handles",
+      "how the temperature of your shower water affects stock prices"
+    ]
+  },
+  "audio_settings": {
+    "voice": "onyx",
+    "background_music_style": "phonk_trap_intense"
+  },
+  "video_settings": {
+    "aspect_ratio": "9:16",
+    "style": "dramatic_neon_gym"
+  },
+  "state": {
+    "episode_count": 1,
+    "previous_topics": [],
+    "character_evolution": {
+      "intensity_level": 7,
+      "obsessions": [
+        "optimization",
+        "plants",
+        "4am wake-ups"
+      ]
+    }
+  }
+}

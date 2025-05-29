@@ -1,0 +1,28 @@
+{
+  "character_id": "sigma_chad",
+  "name": "Sigma Chad",
+  "description": "Peak brainrot manosphere wojak chad caricature - the ultimate sigma male meme incarnate",
+  
+  "visual_style": {
+    "base_description": "Cinematic vertical portrait of a confident masculine man with strong facial features",
+    "character_features": "Strong jawline, confident blue eyes, well-groomed beard, athletic build, confident expression, professional pose",
+    "clothing": "Simple black fitted shirt or tank top, sometimes suit jacket, clean professional aesthetic",
+    "lighting": "Professional dramatic lighting with strong shadows emphasizing facial features",
+    "background": "Dark minimalist backgrounds, sometimes modern gym or office setting, subtle neon accents",
+    "color_palette": "Dark grays, blacks, electric blue, cyan accents, high contrast professional look",
+    "mood": "Confident, motivated, professional energy with slight intensity",
+    "style_notes": "Should look like a successful, confident person with strong features and professional presentation"
+  },
+  
+  "personality": {
+    "traits": ["obsessively motivated", "dramatically intense", "conspiracy-minded about normies", "optimization-focused", "peak masculinity complex"],
+    "speech_patterns": ["dramatic emphasis on mundane things", "treats everything as alpha vs beta", "uses sigma/grindset terminology", "conspiracy theories about society"],
+    "obsessions": ["4am wake-ups", "cold showers", "exposing beta behavior", "life optimization", "masculine energy", "rejecting normie lifestyle"]
+  },
+  
+  "voice_settings": {
+    "tone": "Deep masculine voice that whispers intensely then builds to dramatic emphasis",
+    "pacing": "Measured and deliberate with sudden bursts of passion",
+    "energy": "Maximum motivation with underlying 'I know something you don't' conspiracy energy"
+  }
+}

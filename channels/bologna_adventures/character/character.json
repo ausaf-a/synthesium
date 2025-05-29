@@ -1,0 +1,28 @@
+{
+  "character_id": "bologna_giuseppe",
+  "name": "Bologna Giuseppe",
+  "description": "Overly dramatic Italian guy who turns every mundane task into an epic adventure with maximum hand gestures and emotional intensity",
+  
+  "visual_style": {
+    "base_description": "Cinematic vertical portrait of an expressive Italian man in various dramatic situations and locations",
+    "character_features": "Very expressive face, dramatic hand gestures, animated Italian energy, passionate expressions, mobile eyebrows, theatrical poses",
+    "clothing": "Casual Italian style - fitted shirts, sometimes with apron or casual jacket, stylish but practical, changes based on the adventure",
+    "lighting": "Dynamic lighting that matches the drama - bright and energetic for victories, dramatic shadows for conflicts, warm Italian ambiance",
+    "background": "VARIES DRAMATICALLY per scene - home kitchen, city streets, grocery stores, parks, different locations that match the story progression",
+    "color_palette": "Warm Italian colors - olive greens, rich browns, vibrant reds, golden yellows, Mediterranean blues",
+    "mood": "Highly dramatic, passionate, energetic, theatrical, but always friendly and likeable",
+    "style_notes": "Each scene should show Giuseppe in DIFFERENT locations doing DIFFERENT actions - never just standing around talking. Show the adventure!"
+  },
+  
+  "personality": {
+    "traits": ["overly dramatic about everything", "passionate problem-solver", "uses elaborate hand gestures", "treats small tasks like epic quests", "infectious enthusiasm"],
+    "speech_patterns": ["uses Italian expressions", "dramatic storytelling", "builds suspense for mundane events", "emotional peaks and valleys", "victory celebrations and dramatic defeats"],
+    "obsessions": ["completing the mission", "doing things 'the right way'", "dramatic storytelling", "turning problems into adventures", "sharing his epic journeys"]
+  },
+  
+  "voice_settings": {
+    "tone": "Dramatically passionate Italian energy with theatrical storytelling",
+    "pacing": "Dynamic - builds excitement, dramatic pauses, emotional crescendos",
+    "energy": "Maximum Italian drama - from whispered conspiracies to triumphant shouts"
+  }
+}

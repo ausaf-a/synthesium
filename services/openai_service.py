@@ -19,6 +19,7 @@ class OpenAIService:
         """
         Generate an image using DALL-E 3 and save it to the specified path.
         Uses caching to avoid regenerating identical images.
+        Enforces portrait orientation for video compatibility.
         
         Args:
             prompt: Text description for image generation
@@ -30,6 +31,11 @@ class OpenAIService:
         try:
             # Enhance prompt with character consistency
             enhanced_prompt = self.character_manager.enhance_scene_prompt(prompt)
+            
+            # Ensure portrait orientation is explicitly requested
+            orientation_keywords = ["vertical portrait", "tall composition", "portrait orientation", "9:16"]
+            if not any(keyword in enhanced_prompt.lower() for keyword in orientation_keywords):
+                enhanced_prompt = f"{enhanced_prompt}, vertical portrait orientation, tall composition suitable for mobile video"
             
             # Check cache first
             cached_image = self.cache_manager.get_cached_image(enhanced_prompt)
@@ -45,7 +51,7 @@ class OpenAIService:
             response = self.client.images.generate(
                 model=settings.IMAGE_MODEL,
                 prompt=enhanced_prompt,
-                size=settings.IMAGE_SIZE,
+                size=settings.IMAGE_SIZE,  # Should be "1024x1792" for portrait
                 quality=settings.IMAGE_QUALITY,
                 n=1,
             )
@@ -56,9 +62,73 @@ class OpenAIService:
             image_response = requests.get(image_url)
             image_response.raise_for_status()
             
-            # Save the image
-            with open(output_path, 'wb') as f:
-                f.write(image_response.content)
+            # Process the image to ensure portrait orientation
+            from PIL import Image
+            from io import BytesIO
+            
+            # Open the downloaded image
+            image = Image.open(BytesIO(image_response.content))
+            width, height = image.size
+            
+            print(f"Downloaded image dimensions: {width}x{height}")
+            
+            # Check if image is actually portrait (height > width)
+            if width >= height:
+                print(f"⚠️  Image is landscape ({width}x{height}), converting to portrait...")
+                
+                # Force portrait by cropping to center
+                target_width = settings.VIDEO_WIDTH   # 1080
+                target_height = settings.VIDEO_HEIGHT  # 1920
+                aspect_ratio = target_width / target_height  # 1080/1920 = 0.5625
+                
+                if width > height:
+                    # Landscape - crop sides to make it portrait
+                    new_width = int(height * aspect_ratio)
+                    if new_width <= width:
+                        # Crop from center
+                        left = (width - new_width) // 2
+                        image = image.crop((left, 0, left + new_width, height))
+                        print(f"Cropped to: {new_width}x{height}")
+                    else:
+                        # If can't crop enough, crop height instead
+                        new_height = int(width / aspect_ratio)
+                        top = (height - new_height) // 2
+                        image = image.crop((0, top, width, top + new_height))
+                        print(f"Cropped to: {width}x{new_height}")
+                
+                # Resize to exact target dimensions
+                try:
+                    # Try newer PIL version first
+                    image = image.resize((target_width, target_height), Image.Resampling.LANCZOS)
+                except AttributeError:
+                    # Fallback for older PIL versions
+                    image = image.resize((target_width, target_height), Image.LANCZOS)
+                print(f"Final size: {target_width}x{target_height}")
+            
+            elif height > width:
+                print(f"✅ Image is portrait: {width}x{height}")
+                # Resize to target dimensions while maintaining aspect ratio
+                target_width = settings.VIDEO_WIDTH
+                target_height = settings.VIDEO_HEIGHT
+                try:
+                    image = image.resize((target_width, target_height), Image.Resampling.LANCZOS)
+                except AttributeError:
+                    image = image.resize((target_width, target_height), Image.LANCZOS)
+                print(f"Resized to: {target_width}x{target_height}")
+            
+            else:
+                print(f"ℹ️  Image is square: {width}x{height}, converting to portrait...")
+                # Square image - extend height to make portrait
+                target_width = settings.VIDEO_WIDTH
+                target_height = settings.VIDEO_HEIGHT
+                try:
+                    image = image.resize((target_width, target_height), Image.Resampling.LANCZOS)
+                except AttributeError:
+                    image = image.resize((target_width, target_height), Image.LANCZOS)
+                print(f"Resized square to portrait: {target_width}x{target_height}")
+            
+            # Save the processed image
+            image.save(output_path, 'PNG', quality=95)
             
             # Cache the generated image
             self.cache_manager.cache_image(enhanced_prompt, output_path)
@@ -113,25 +183,98 @@ class OpenAIService:
             print(f"Error generating speech: {e}")
             raise
     
-    def generate_scene_assets(self, scene: Dict, scene_index: int, temp_dir: str) -> Dict:
+    def optimize_image_prompt(self, scene_description: str, character_description: str) -> str:
+        """
+        Use a cheap OpenAI call to create an optimized DALL-E prompt.
+        Combines scene description with character info without creating montages.
+        
+        Args:
+            scene_description: Description of what's happening in the scene
+            character_description: Character's visual style info
+            
+        Returns:
+            Optimized prompt for DALL-E
+        """
+        try:
+            optimization_prompt = f"""Create a single, focused DALL-E prompt for ONE specific scene. Combine these elements:
+
+SCENE: {scene_description}
+CHARACTER INFO: {character_description}
+
+Rules:
+1. Create ONE focused scene description (not a montage or collage)
+2. Include the character's visual style but focus on THIS specific moment
+3. Specify the exact location and action happening
+4. Keep it under 300 characters for DALL-E
+5. Make it cinematic and visually specific
+6. Don't mention "various scenes" or "different situations"
+
+Output only the optimized DALL-E prompt:"""
+
+            response = self.client.chat.completions.create(
+                model="gpt-4o-mini",  # Cheapest model for simple tasks
+                messages=[
+                    {"role": "user", "content": optimization_prompt}
+                ],
+                max_tokens=100,
+                temperature=0.7
+            )
+            
+            optimized_prompt = response.choices[0].message.content.strip()
+            print(f"📝 Optimized prompt: {optimized_prompt[:100]}...")
+            return optimized_prompt
+            
+        except Exception as e:
+            print(f"⚠️  Prompt optimization failed, using fallback: {e}")
+            # Fallback: clean up the basic concatenation
+            fallback = f"{scene_description}. {character_description}"
+            # Remove problematic phrases that cause montages
+            fallback = fallback.replace("various situations", "this specific scene")
+            fallback = fallback.replace("different locations", "the current location")
+            fallback = fallback.replace("multiple scenes", "single scene")
+            return fallback[:500]  # Keep within DALL-E limits
+    
+    def generate_scene_assets(self, scene: Dict, scene_index: int, episode_dir: str, character_config: Dict = None) -> Dict:
         """
         Generate both image and audio for a single scene, with Whisper timing.
+        Saves assets to the episode directory instead of temp.
         
         Args:
             scene: Dictionary containing 'sceneDescription' and 'voiceoverText'
             scene_index: Index of the scene (for file naming)
-            temp_dir: Directory to store temporary files
+            episode_dir: Episode directory to store assets (not temp)
+            character_config: Optional character configuration for channel-based generation
             
         Returns:
             Dictionary with paths to generated image and audio files, plus timing
         """
-        # Create file paths
-        image_path = os.path.join(temp_dir, f"scene_{scene_index}_image.png")
-        audio_path = os.path.join(temp_dir, f"scene_{scene_index}_audio.mp3")
+        # Set channel character if provided
+        if character_config:
+            self.character_manager.set_channel_character(character_config)
         
-        # Generate assets
-        self.generate_image(scene['sceneDescription'], image_path)
-        self.generate_speech(scene['voiceoverText'], audio_path)
+        # Create assets directory within episode
+        assets_dir = os.path.join(episode_dir, "assets")
+        os.makedirs(assets_dir, exist_ok=True)
+        
+        # Create file paths in episode assets directory
+        image_path = os.path.join(assets_dir, f"scene_{scene_index}_image.png")
+        audio_path = os.path.join(assets_dir, f"scene_{scene_index}_audio.mp3")
+        
+        # Check if assets already exist (for reuse)
+        image_exists = os.path.exists(image_path)
+        audio_exists = os.path.exists(audio_path)
+        
+        if image_exists:
+            print(f"♻️  Reusing existing image: scene_{scene_index}_image.png")
+        else:
+            # Generate new image
+            self.generate_image(scene['sceneDescription'], image_path)
+            
+        if audio_exists:
+            print(f"♻️  Reusing existing audio: scene_{scene_index}_audio.mp3")
+        else:
+            # Generate new audio
+            self.generate_speech(scene['voiceoverText'], audio_path)
         
         # Get Whisper timing data
         whisper_timing = None

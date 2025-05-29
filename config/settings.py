@@ -36,6 +36,13 @@ class Settings:
     TTS_VOICE = "onyx"  # OpenAI TTS voice options: alloy, echo, fable, onyx, nova, shimmer
     TTS_MODEL = "tts-1"  # or "tts-1-hd" for higher quality
     
+    # Background Music Configuration
+    ENABLE_BACKGROUND_MUSIC = True
+    MUSIC_VOLUME = 0.15  # Background music volume (0.0 to 1.0)
+    VOICEOVER_VOLUME = 1.0  # Voiceover volume (0.0 to 1.0)
+    MUSIC_FADE_DURATION = 0.5  # Fade in/out duration in seconds
+    MUSIC_DIR = "assets/music"  # Directory containing music files
+    
     # Image Configuration
     IMAGE_MODEL = "dall-e-3"
     IMAGE_SIZE = "1024x1792"  # Vertical format

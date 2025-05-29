@@ -1,70 +1,55 @@
-# Product Requirements Document (PRD)
+# Synthesium - AI Video Generator
 
-**Project Name:** Synthesium Video Generator
+## Overview
+Synthesium generates narrative-driven videos using AI. It creates scenes with DALL-E images, OpenAI TTS voiceovers, dynamic camera movements, and real-time Whisper-synced captions.
 
-**Goal:** Create short-form, narrative-driven videos composed of AI-generated images and voiceovers, optimized for YouTube Shorts.
+## Current Architecture
 
----
+### Core Components
+- **synth.py** - Main orchestrator
+- **config/settings.py** - All configuration
+- **services/** - AI services (OpenAI, Whisper, Caching, Characters, Captions)
+- **video/** - Video composition and rendering
 
-## Features
+### Key Features Implemented
+1. **Image Generation** - DALL-E 3 with character consistency
+2. **Audio Generation** - OpenAI TTS with voice selection
+3. **Camera Movement** - Ken Burns effects (zoom, pan)
+4. **Real-time Captions** - Single word pop with Whisper timing
+5. **Smart Caching** - Avoids regenerating identical content
+6. **Whisper Integration** - Professional speech-to-caption sync
 
-- **Script Ingestion:** Accepts a structured list of scenes with descriptions and narration.
-- **Image Generation:** Converts textual prompts into images using AI models (e.g., Stable Diffusion) or APIs like Unsplash.
-- **Voiceover Synthesis:** Generates voiceovers using TTS engines (e.g., gTTS, Bark, or Tortoise TTS).
-- **Clip Composition:** Combines images and narration into video clips using `moviepy`, with optional background music.
-- **Final Video Assembly:** Stitches individual scene clips into a cohesive video.
-
----
-
-## Technical Requirements
-
-- **Python Version:** 3.8+
-- **Libraries/Tools:**
-  - `moviepy` for video editing
-  - `gTTS` or other TTS engines for voice generation
-  - `requests` for downloading images
-  - Optional: Local AI models for advanced visuals or voices
-
----
-
-## Success Criteria
-
-- **Performance:** Generate a 15-second video in under 2 minutes.
-- **Synchronization:** Voiceover and visuals are aligned.
-- **Clarity:** Script flow is preserved and understandable.
-- **Output Format:** YouTube Shorts-ready (vertical format, <60 seconds).
-
----
-
-## Example Script
-```python
-script = [
-    {
-        "sceneDescription": "A lonely robot sits on a rooftop watching the city lights.",
-        "voiceoverText": "He was built to serve, but all he wanted was to feel."
-    },
-    {
-        "sceneDescription": "Raindrops fall on his metal shell as neon signs flicker below.",
-        "voiceoverText": "The city pulsed with life—something he could never truly grasp."
-    },
-    {
-        "sceneDescription": "He watches a couple sharing an umbrella across the street.",
-        "voiceoverText": "Love, warmth, connection—it all seemed so distant."
-    },
-    {
-        "sceneDescription": "A small cat curls up beside him, purring softly.",
-        "voiceoverText": "And yet, in that moment, something stirred within him."
-    },
-    {
-        "sceneDescription": "The robot gently pets the cat as the rain continues to fall.",
-        "voiceoverText": "Maybe feeling wasn't programmed—but maybe it didn't need to be."
-    }
-]
-```
-
-
-## Usage
+## Quick Start
 ```bash
-pip install -r requirements.txt
+# Normal run (uses cache)
 python synth.py
+
+# Force regenerate images
+python synth.py --regenerate-images
+
+# Check cache stats
+python synth.py --cache-stats
 ```
+
+## Recent Commits History
+- **Commit 1**: Basic video generation pipeline
+- **Commit 2**: Camera movement (Ken Burns effects)
+- **Commit 3**: Real-time captions + Whisper + Caching
+
+## Current Status
+✅ Working: Full pipeline with Whisper timing
+✅ Working: Smart caching system saves 99% cost on iterations
+✅ Working: Professional caption sync
+⚠️ Next: [See ROADMAP.md]
+
+## Configuration
+Key settings in `config/settings.py`:
+- `ENABLE_CACHE` - Smart caching (default: True)
+- `ENABLE_CAPTIONS` - Word-by-word captions (default: True)  
+- `ENABLE_WHISPER_TIMING` - Professional timing (default: True)
+- `CAPTION_FONT` - Font selection (default: Montserrat-Bold)
+
+## Troubleshooting
+- **Font issues**: Install Montserrat or uses Helvetica fallback
+- **API costs**: Enable caching to avoid regeneration
+- **Timing issues**: Whisper falls back to equal timing if validation fails

@@ -3,6 +3,7 @@ import random
 from moviepy.editor import *
 from config.settings import settings
 from services.caption_service import CaptionService
+from services.audio_manager import AudioManager
 from typing import List, Dict
 
 class VideoComposer:
@@ -14,6 +15,7 @@ class VideoComposer:
         self.zoom_intensity = settings.ZOOM_INTENSITY
         self.pan_intensity = settings.PAN_INTENSITY
         self.caption_service = CaptionService()
+        self.audio_manager = AudioManager()
     
     def apply_camera_movement(self, image_clip: ImageClip, duration: float) -> VideoClip:
         """
@@ -162,7 +164,7 @@ class VideoComposer:
     
     def create_scene_clip(self, scene_assets: Dict) -> VideoClip:
         """
-        Create a video clip from scene assets (image + audio + captions).
+        Create a video clip from scene assets (image + audio + captions + background music).
         
         Args:
             scene_assets: Dictionary containing image_path, audio_path, etc.
@@ -174,6 +176,10 @@ class VideoComposer:
             # Load audio to determine clip duration
             audio_clip = AudioFileClip(scene_assets['audio_path'])
             duration = audio_clip.duration
+            
+            # Select and mix background music
+            background_track = self.audio_manager.select_background_track(scene_assets.get('scene_description'))
+            mixed_audio = self.audio_manager.mix_audio(audio_clip, background_track)
             
             # Load image and ensure consistent portrait orientation
             image_clip = ImageClip(scene_assets['image_path']).set_duration(duration)
@@ -198,12 +204,14 @@ class VideoComposer:
             if caption_clip:
                 # Composite video with captions
                 final_clip = CompositeVideoClip([video_clip, caption_clip], size=(self.width, self.height))
-                scene_clip = final_clip.set_audio(audio_clip)
-                print(f"Created scene clip with captions - Duration: {duration:.2f}s")
+                scene_clip = final_clip.set_audio(mixed_audio)
+                music_status = "with music" if background_track else "no music"
+                print(f"Created scene clip with captions and {music_status} - Duration: {duration:.2f}s")
             else:
                 # Just video and audio
-                scene_clip = video_clip.set_audio(audio_clip)
-                print(f"Created scene clip without captions - Duration: {duration:.2f}s")
+                scene_clip = video_clip.set_audio(mixed_audio)
+                music_status = "with music" if background_track else "no music"
+                print(f"Created scene clip {music_status} - Duration: {duration:.2f}s")
             
             return scene_clip
             
@@ -238,18 +246,37 @@ class VideoComposer:
             else:
                 final_video = concatenate_videoclips(clips, method="compose")
             
-            # Write the final video
+            # Write the final video with progress indicator
             print(f"Rendering final video to: {output_path}")
-            final_video.write_videofile(
-                output_path,
-                fps=self.fps,
-                codec='libx264',
-                audio_codec='aac',
-                temp_audiofile='temp-audio.m4a',
-                remove_temp=True,
-                verbose=False,
-                logger=None
-            )
+            print("🎥 Starting video render...")
+            
+            try:
+                # Try with progress bar enabled (default MoviePy behavior)
+                final_video.write_videofile(
+                    output_path,
+                    fps=self.fps,
+                    codec='libx264',
+                    audio_codec='aac',
+                    temp_audiofile='temp-audio.m4a',
+                    remove_temp=True,
+                    verbose=True,  # Enable verbose output for progress
+                    logger='bar'   # Use progress bar logger
+                )
+            except Exception as e:
+                # Fallback with minimal output
+                print(f"⚠️  Progress indicator failed, using quiet mode: {e}")
+                final_video.write_videofile(
+                    output_path,
+                    fps=self.fps,
+                    codec='libx264',
+                    audio_codec='aac',
+                    temp_audiofile='temp-audio.m4a',
+                    remove_temp=True,
+                    verbose=False,
+                    logger=None
+                )
+            
+            print("✅ Video rendering complete!")
             
             # Clean up clips
             for clip in clips:

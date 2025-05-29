@@ -46,6 +46,35 @@ class CharacterManager:
             'consistency_enabled': self.consistency_enabled
         }
     
+    def set_channel_character(self, character_config: Dict):
+        """
+        Set character configuration from channel data.
+        
+        Args:
+            character_config: Character configuration dictionary from channel
+        """
+        if not character_config:
+            return
+        
+        visual_style = character_config.get("visual_style", {})
+        
+        # Build enhanced character description from channel character
+        if "base_description" in visual_style:
+            self.character_description = f"""{visual_style['base_description']}
+            
+Lighting: {visual_style.get('lighting', 'dramatic lighting')}
+Background: {visual_style.get('background', 'dark background')}
+Character Features: {visual_style.get('character_features', 'distinctive character')}
+Mood: {visual_style.get('mood', 'intense energy')}"""
+        
+        # Update style anchor with channel-specific style
+        if "color_palette" in visual_style:
+            self.style_anchor = f"Color palette: {visual_style['color_palette']}. Style: Cinematic, high-quality, professional video production. Vertical portrait format."
+        
+        character_name = character_config.get("name", "Channel Character")
+        print(f"📺 Using channel character: {character_name}")
+        print(f"🎭 Description: {character_config.get('description', 'Custom character')}")
+    
     def generate_character_sheet_prompt(self) -> str:
         """
         Generate a prompt for creating a character reference sheet.
