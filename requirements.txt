@@ -1,5 +1,5 @@
-moviepy
+moviepy=1.0.3
 requests
 openai>=1.0.0
 python-dotenv
-pillow
+pillow=8.4.0
