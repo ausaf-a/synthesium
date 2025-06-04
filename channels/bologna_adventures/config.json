@@ -37,9 +37,10 @@
     "style": "italian_comedy_adventure"
   },
   "state": {
-    "episode_count": 2,
+    "episode_count": 3,
     "previous_topics": [
-      "convince his grandmother to try using Netflix for the first time"
+      "convince his grandmother to try using Netflix for the first time",
+      "win an argument with a self-checkout machine"
     ],
     "character_evolution": {
       "drama_level": 8,

@@ -29,8 +29,20 @@ class OpenAIService:
             Path to the saved image file
         """
         try:
-            # Enhance prompt with character consistency
-            enhanced_prompt = self.character_manager.enhance_scene_prompt(prompt)
+            # Check if we have character info for optimization
+            character_info = self.character_manager.get_character_info()
+            if character_info.get('consistency_enabled') and character_info.get('character_description'):
+                # Extract character info from the character manager
+                character_description = character_info.get('character_description', '')
+                style_anchor = character_info.get('style_anchor', '')
+                
+                # Combine character info for optimization
+                full_character_description = f"{character_description} {style_anchor}".strip()
+                
+                # Use AI optimization to create a focused prompt
+                enhanced_prompt = self.optimize_image_prompt(prompt, full_character_description)
+            else:
+                enhanced_prompt = f"Cinematic vertical portrait image: {prompt}"
             
             # Ensure portrait orientation is explicitly requested
             orientation_keywords = ["vertical portrait", "tall composition", "portrait orientation", "9:16"]
@@ -46,7 +58,7 @@ class OpenAIService:
                 return output_path
             
             print(f"Generating image: {prompt[:50]}...")
-            print(f"Enhanced prompt: {enhanced_prompt[:100]}...")
+            print(f"Using prompt: {enhanced_prompt[:100]}...")
             
             response = self.client.images.generate(
                 model=settings.IMAGE_MODEL,
@@ -221,7 +233,7 @@ Output only the optimized DALL-E prompt:"""
             )
             
             optimized_prompt = response.choices[0].message.content.strip()
-            print(f"📝 Optimized prompt: {optimized_prompt[:100]}...")
+            print(f"🤖 AI-optimized prompt: {optimized_prompt[:80]}...")
             return optimized_prompt
             
         except Exception as e:
